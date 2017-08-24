@@ -1,60 +1,29 @@
 <head>
 <script src="https://unpkg.com/vue"></script>
 <script>
-console.log('start');
-var character = {};
-var requestURL = 'sample-data/von.json';
-var request = new XMLHttpRequest();
-//request.responseType = 'json';
-request.onloadend = function(r) {
-  character = JSON.parse( request.response );
-  console.log('got: ', r, request);
-  initVue(character);
+window.activate = function(){
+    console.log('start');
+    var character = {};
+    var requestURL = 'sample-data/von.json';
+    var request = new XMLHttpRequest();
+    //request.responseType = 'json';
+    request.onloadend = function(r) {
+      character = JSON.parse( request.response );
+      console.log('got: ', r, request);
+      //initVue(character);
+      var event = new CustomEvent("initVueEvent", {
+          detail: {
+            character: character
+          }
+      });
+      window.dispatchEvent(event);
+    }
+    //request.addEventListener('load', initVue);
+    request.open('GET', requestURL);
+    request.send();
 }
-//request.addEventListener('load', initVue);
-request.open('GET', requestURL);
-request.send();
-
-function initVue(character){
-    console.log('init: ', character);
-
-    Vue.component('stat-box', {
-        props: ['statType', 'stat', 'statModifiers', "index"],
-    	data: function() {
-            statObj = { value: this.stat };
-            statObj.innerkey = this.statType + '-value';
-            return statObj;
-    	},
-    	computed: {
-    		finalStatistic: function(){
-    			return this.value + this.statModifiers[this.statType];
-    		},
-    		activeModifier: function(){
-    			let total = this.value + this.statModifiers[this.statType];
-    			switch (total) {
-    				case ( 8 <= total <= 10 ):
-
-    					break;
-    				default:
-
-    			}
-    		}
-    	},
-    	template: "<div :id=\"statType\"><div :id=\"innerkey\">{{ finalStatistic }}</div></div>"
-    });
-
-    new Vue({
-      el: '#app',
-      data: {
-          title: character.character_name,
-          stat_modifiers: character.stat_modifiers,
-          stats: character.stats
-      }
-    });
-
-}
-
 </script>
+<script src="dist/app.js" onload="window.activate()"></script>
 </head>
 <body>
 <div id="app">
