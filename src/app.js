@@ -8,7 +8,8 @@ export function initVue (initEvent){
       data: {
           title: character.character_name,
           stat_modifiers: character.stat_modifiers,
-          stats: character.stats
+          stats: character.stats,
+          character: character
       }
     });
 
