@@ -1,5 +1,6 @@
 <head>
 <script src="https://unpkg.com/vue"></script>
+<link rel="stylesheet" type="text/css" href="dist/app.css">
 <script>
 window.activate = function(){
     console.log('start');
@@ -28,6 +29,8 @@ window.activate = function(){
 <body>
 <div id="app">
     <h1 v-bind:title="title"> {{ title }} </h1>
-    <stat-box v-for="(stat, key, index) in stats" v-bind:stat-type="key" v-bind:key="key" v-bind:index="index" v-bind:stat="stat" v-bind:stat-modifiers="stat_modifiers"></stat-box>
+    <div id="stats-area">
+        <stat-box v-for="(stat, key, index) in stats" v-bind:stat-type="key" v-bind:key="key" v-bind:index="index" v-bind:stat="stat" v-bind:stat-modifiers="stat_modifiers"></stat-box>
+    </div>
 </div>
 </body>
