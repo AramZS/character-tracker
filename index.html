@@ -1,0 +1,33 @@
+<head>
+<script src="https://unpkg.com/vue"></script>
+<script>
+window.activate = function(){
+    console.log('start');
+    var character = {};
+    var requestURL = 'sample-data/von.json';
+    var request = new XMLHttpRequest();
+    //request.responseType = 'json';
+    request.onloadend = function(r) {
+      character = JSON.parse( request.response );
+      console.log('got: ', r, request);
+      //initVue(character);
+      var event = new CustomEvent("initVueEvent", {
+          detail: {
+            character: character
+          }
+      });
+      window.dispatchEvent(event);
+    }
+    //request.addEventListener('load', initVue);
+    request.open('GET', requestURL);
+    request.send();
+}
+</script>
+<script src="dist/app.js" onload="window.activate()"></script>
+</head>
+<body>
+<div id="app">
+    <h1 v-bind:title="title"> {{ title }} </h1>
+    <stat-box v-for="(stat, key, index) in stats" v-bind:stat-type="key" v-bind:key="key" v-bind:index="index" v-bind:stat="stat" v-bind:stat-modifiers="stat_modifiers"></stat-box>
+</div>
+</body>
