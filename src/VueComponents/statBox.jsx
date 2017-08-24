@@ -20,5 +20,13 @@ export const statBox = Vue.component('stat-box', {
 			}
 		}
 	},
-	template: "<div :id=\"statType\"><div :id=\"innerkey\">{{ finalStatistic }}</div></div>"
+	render: function render(h) {
+        return (
+            <div id={ this.statType }>
+                <div id={ this.innerkey }>
+                    { this.finalStatistic }
+                </div>
+            </div>
+        );
+    }
 });
