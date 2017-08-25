@@ -28,7 +28,7 @@ window.activate = function(){
 </head>
 <body>
 <div id="app">
-    <h1 v-bind:title="title"> {{ title }} </h1>
+    <h1 class="f1" v-bind:title="title"> {{ title }} </h1>
     <div id="stats-area">
         <stat-box v-for="(stat, key, index) in stats" v-bind:stat-type="key" v-bind:key="key" v-bind:index="index" v-bind:stat="stat" v-bind:stat-modifiers="stat_modifiers"></stat-box>
     </div>

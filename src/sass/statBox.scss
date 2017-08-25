@@ -1,5 +1,5 @@
 #stats-area {
 	div {
-		background-color: #808080;
+		@extend .fl, .w-10, .bg-washed-green;
 	}
 }
